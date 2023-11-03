@@ -8,12 +8,9 @@ const getNotes = () => {
 // add note
 const addNote = (title, body) => {
   const notes = loadNotes();
-  const duplicateNotes = notes.filter((note) => note.title === title);
+  const duplicateNote = notes.find((note) => note.title === title);
 
-  /*   const duplicateNotes = notes.filter((note) => {
-    return note.title === title; */
-
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     notes.push({
       title: title,
       body: body,
@@ -50,6 +47,33 @@ const listNotes = () => {
   const notes = loadNotes();
   notes.forEach((noteTitle) => console.log(noteTitle.title));
 };
+
+// read note
+
+const readNote = (title) => {
+  const notes = loadNotes();
+
+  const note = notes.find((note) => note.title === title);
+
+  if (note) {
+    console.log(chalk.inverse.blue(note.title));
+    console.log("- " + note.body);
+  } else {
+    console.log(chalk.inverse.red("Fubar, check your code"));
+  }
+
+  // This also worked
+
+  /*  notes.forEach((test) => {
+    if (test.title === title) {
+      console.log(chalk.green.inverse(test.title));
+      console.log(" - " + test.body);
+    } else {
+      console.log(chalk.red.inverse("ERROR - Normal katastrof"));
+    }
+  }); */
+};
+
 /////////////////////////////////////////////////////////////////
 
 const saveNotes = (notes) => {
@@ -72,4 +96,5 @@ module.exports = {
   addNote: addNote,
   removeNote: removeNote,
   listNotes: listNotes,
+  readNote: readNote,
 };
