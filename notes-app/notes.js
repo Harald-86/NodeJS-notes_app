@@ -29,11 +29,18 @@ const addNote = function (title, body) {
 const removeNote = function (title) {
   const notes = loadNotes();
   console.log(notes);
-  const checkNotesList = notes.filter(function (note) {
+  const notesToKeep = notes.filter(function (note) {
     return note.title !== title;
   });
-  console.log("Current list: ", checkNotesList);
-  saveNotes(checkNotesList);
+  console.log("Current list: ", notesToKeep);
+
+  if (notes.length > notesToKeep.length) {
+    console.log(chalk.inverse.green("Note removed!"));
+    saveNotes(notesToKeep);
+  } else {
+    console.log(chalk.inverse.red("No note found!"));
+  }
+  /*  saveNotes(notesToKeep); */
 };
 
 /////////////////////////////////////////////////////////////////
