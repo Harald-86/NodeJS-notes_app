@@ -4,6 +4,7 @@ const getNotes = function () {
   return "your notes...";
 };
 
+// add note
 const addNote = function (title, body) {
   const notes = loadNotes();
   const duplicateNotes = notes.filter(function (note) {
@@ -23,6 +24,20 @@ const addNote = function (title, body) {
   }
 };
 
+// Remove note
+
+const removeNote = function (title) {
+  const notes = loadNotes();
+  console.log(notes);
+  const checkNotesList = notes.filter(function (note) {
+    return note.title !== title;
+  });
+  console.log("Current list: ", checkNotesList);
+  saveNotes(checkNotesList);
+};
+
+/////////////////////////////////////////////////////////////////
+
 const saveNotes = function (notes) {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
@@ -38,4 +53,8 @@ const loadNotes = function () {
   }
 };
 
-module.exports = { getNotes: getNotes, addNote: addNote };
+module.exports = {
+  getNotes: getNotes,
+  addNote: addNote,
+  removeNote: removeNote,
+};
