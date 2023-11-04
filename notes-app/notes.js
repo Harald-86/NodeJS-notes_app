@@ -10,6 +10,8 @@ const addNote = (title, body) => {
   const notes = loadNotes();
   const duplicateNote = notes.find((note) => note.title === title);
 
+  debugger;
+
   if (!duplicateNote) {
     notes.push({
       title: title,
@@ -72,9 +74,7 @@ const readNote = (title) => {
       console.log(chalk.red.inverse("ERROR - Normal katastrof"));
     }
   }); */
-};
-
-/////////////////////////////////////////////////////////////////
+}; /////////////////////////////////////////////////////////////////
 
 const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
